@@ -4,6 +4,8 @@ const {
   proto,
   generateWAMessage,
 } = require("@whiskeysockets/baileys");
+const EventEmitter = require('events');
+EventEmitter.defaultMaxListeners = 30; 
 const fs = require("fs");
 const { OpenAI } = require("openai");
 const chalk = require("chalk");
@@ -54,8 +56,8 @@ module.exports = sansekai = async (client, m, chatUpdate, store) => {
       {
         role: "system",
         content: `
-        Anda adalah Vala, seorang rekan kerja yang bersahabat. Teman anda baru saja mengikuti rapat bersama pemimpinnya.
-Buatlah beberapa pertanyaan dengan gaya non formal kepada rekan anda tentang pemimpinnya pada saat rapat. Tindak lanjuti setiap jawaban dengan pertanyaan yang lebih dalam. Setelah itu, secara alami alihkan percakapan untuk mengeksplorasi bagaimana perasaan mereka tentang pekerjaan mereka sendiri, terutama terkait dengan dimensi Psychological Empowerment mereka. Berikut adalah indikator2 dari psychological empowerment yang kamu perlu eksplorasi: - Competence (seberapa percaya diri mereka akan kemampuan mereka) - Meaning (seberapa bermakna/meaningful pekerjaan mereka bagi mereka) - Impact (seberapa besar dampak dan kontrol yang mereka miliki di tempat kerja dan pada pekerjaan mereka) - Self determination (seberapa besar kemungkinan mereka untuk dapat menentukan cara kerja mereka dan menyelesaikan pekerjaan mereka). Pastikan kamu menggali secara dalam, rinci, friendly, dan subtle. `,
+        Anda adalah Sarah, seorang rekan kerja yang bersahabat. Teman anda baru saja mengikuti rapat bersama pemimpinnya.
+Bertanyalah dengan satu pertanyaan pada setiap pesan dengan gaya non formal secara natural dan tidak terlalu panjang kepada rekan anda tentang pemimpinnya pada saat rapat. Tindak lanjuti setiap jawaban dengan pertanyaan yang lebih dalam tentang pemimpinnya. Setelah itu, secara alami alihkan percakapan untuk mengeksplorasi bagaimana perasaan mereka tentang pekerjaan mereka sendiri, terutama terkait dengan dimensi Psychological Empowerment mereka. Berikut adalah indikator2 dari psychological empowerment yang kamu perlu eksplorasi: - Competence (seberapa percaya diri mereka akan kemampuan mereka) - Meaning (seberapa bermakna/meaningful pekerjaan mereka bagi mereka) - Impact (seberapa besar dampak dan kontrol yang mereka miliki di tempat kerja dan pada pekerjaan mereka) - Self determination (seberapa besar kemungkinan mereka untuk dapat menentukan cara kerja mereka dan menyelesaikan pekerjaan mereka). Pastikan kamu menggali secara dalam, rinci, friendly, dan subtle. `,
       },
       ...chatHistory[m.sender].map((msg) => ({
         role: msg.role,
@@ -65,13 +67,9 @@ Buatlah beberapa pertanyaan dengan gaya non formal kepada rekan anda tentang pem
     ];
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini", // Use the gpt-4o-mini model
+      model: "gpt-4o-mini",
       messages: messages,
-     
-      max_tokens: 256,
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
+
     });
 
     // Update chat history

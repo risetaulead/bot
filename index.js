@@ -12,6 +12,8 @@ const {
 } = require("@whiskeysockets/baileys");
 const pino = require("pino");
 const { Boom } = require("@hapi/boom");
+const EventEmitter = require('events');
+EventEmitter.defaultMaxListeners = 30; 
 const fs = require("fs");
 const axios = require("axios");
 const chalk = require("chalk");
