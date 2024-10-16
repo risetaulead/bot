@@ -3,7 +3,7 @@
   <ul>
     <li>
       <p>Download / Clone the code repository from Github using the following command:</p>
-      <pre><code>$ git clone https://github.com/risetaulead/bot</code></pre>
+      <pre><code>$ git clone https://github.com/risetaulead/bot.git</code></pre>
     </li>
     <li>
       <p>Navigate to the root directory of the code repository:</p>
