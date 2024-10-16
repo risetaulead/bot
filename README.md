@@ -3,11 +3,11 @@
   <ul>
     <li>
       <p>Download / Clone the code repository from Github using the following command:</p>
-      <pre><code>$ git clone https://github.com/AdakHaddad/WAGPT</code></pre>
+      <pre><code>$ git clone https://github.com/risetaulead/bot</code></pre>
     </li>
     <li>
       <p>Navigate to the root directory of the code repository:</p>
-      <pre><code>$ cd WAGPT</code></pre>
+      <pre><code>$ cd bot</code></pre>
     </li>
     <li>
       <p>Install the required dependencies by running the following command:</p>
